@@ -13,6 +13,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::get('/', 'PostsController@index');
+Route::get('/posts/{post}', 'PostsController@show')->where('post', '[0-9]+');
+Route::get('/posts/create', 'PostsController@create');
+Route::post('/posts', 'PostsController@store');
+Route::get('/posts/edit/{post}', 'PostsController@edit');
+Route::patch('/posts/{post}', 'PostsController@update');
+Route::delete('/posts/{post}', 'PostsController@destroy');
+Route::post('/posts/comments/{post}', 'CommentController@store');
+Route::delete('/posts/comments/{post}/{comment}', 'CommentController@destroy');
